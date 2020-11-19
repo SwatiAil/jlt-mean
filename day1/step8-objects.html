@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let obj1 = new Object();
+        let obj2 = {};
+        let obj3 = Object.create(null);
+        console.log( typeof obj1, typeof obj2, typeof obj3);
+        Object.defineProperty(obj3, 'title', {
+            value : "Batman"
+        });
+        Object.defineProperty(obj3, 'city', {
+            value : "Gotham",
+            writable : true
+        });
+        console.log(obj3.title);// Batman
+        obj3.title = "Joker";
+        console.log(obj3.title);// Batman
+        obj3.city = "Metropolis";
+        console.log(obj3.city);// Batman
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
