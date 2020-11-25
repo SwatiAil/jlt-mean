@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template : `
-  <label>Show Terms and Conditions : 
+  <label *ngIf=!showCondition>Show Terms and Conditions : 
     <input type="checkbox" (change)="showCondition = !showCondition">
   </label>
   <div *ngIf=showCondition class="display">
@@ -15,12 +15,28 @@ import { Component } from '@angular/core';
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, voluptatum voluptatibus. Molestias est earum, eum quos reiciendis esse. Ea eaque, tempora. Dignissimos blanditiis, quod vel quibusdam id voluptatibus eligendi deserunt.
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, voluptatum voluptatibus. Molestias est earum, eum quos reiciendis esse. Ea eaque, tempora. Dignissimos blanditiis, quod vel quibusdam id voluptatibus eligendi deserunt.
     </p>
+    <label *ngIf=showCondition>Hide Terms and Conditions : 
+      <input type="checkbox" (change)="showCondition = !showCondition">
+    </label>
+  </div>
+  <hr>
+  <input #powerRange type="range" [value]="power" (change)="power = powerRange.value" min="0" max="10">
+  <br>
+  <input [(ngModel)]="power" type="range" min="0" max="10">
+  {{ power }}
+  <div [ngSwitch]="power">
+    <p *ngSwitchCase="6">Recovered</p>
+    <p *ngSwitchCase="7">Low Power</p>
+    <p *ngSwitchCase="8">Strong</p>
+    <p *ngSwitchCase="9">Stronger</p>
+    <p *ngSwitchCase="10">Unbeatable</p>
+    <p *ngSwitchDefault >Needs Rest</p>
   </div>
   `,
   styles : [`
     .display{
       width : 600px;
-      height : 300px;
+      height : 320px;
       background-color : silver;
       padding : 10px;
       font-family : verdana;
@@ -32,6 +48,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'step2-directives';
   showCondition = true;
+  power  = 7;
 }
 
 /*
