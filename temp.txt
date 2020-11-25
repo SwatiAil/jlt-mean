@@ -1,63 +1,35 @@
-let http = require("http");
-let fs = require("fs");
+import { Component } from '@angular/core';
 
-let server = http.createServer(function(request, response){
-    fs.readFile("./"+request.url, function(error, data){
-       if(error){
-           let errordata = fs.readFileSync("./404.html");
-           // console.log(errordata.toString());
-           response.writeHead(404, {"Content-type":"text/html"});
-           response.write(errordata.toString());
-           response.end();
-       }else{
-            response.writeHead(200, {"Content-type":"text/html"});
-            response.write(data+"");
-            response.end();
-       }
-    })
-});
+@Component({
+  selector: 'app-root',
+  template : `
+  <h1>More Bindings</h1>
+  <button [disabled]="false" >Click Me</button>
+  <br/>
+  <input type="button" value="Click Me">
+  <br/>
+  <h1>{{ title }}</h1>
+  <button (click)="showAlert()"> Click to show alert </button>
+  <br>
+  <button (click)="changeTitle()"> Click to change title </button>
+  <br>
+  <button (click)="title = 'changed inline'"> Click to change title inline </button>
+  <br>
+  <button on-click="title = 'changed inline'"> Click to change title inline </button>
+  <input (keydown.space)="keyfun($event)" type="text">
+  <br>
 
-let port = 2525;
-let host = "localhost";
-let callback = function(error){
-            if(error){
-                console.log("Error ",error);
-            }else{
-                console.log("web server is now live on localhost:2525");
-            }
-        }
-server.listen(port, host, callback);
-
-
-
-
-===========================================================================================================
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Welcome to your life</h1>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/product.html">Product</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-    </ul>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga numquam ducimus modi saepe odio dolores veniam magni suscipit explicabo possimus, laboriosam a laborum nemo aspernatur? Impedit autem ex at unde.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga numquam ducimus modi saepe odio dolores veniam magni suscipit explicabo possimus, laboriosam a laborum nemo aspernatur? Impedit autem ex at unde.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga numquam ducimus modi saepe odio dolores veniam magni suscipit explicabo possimus, laboriosam a laborum nemo aspernatur? Impedit autem ex at unde.
-    </p>
-</body>
-</html>
-<!--
-    html:5
-    lorem
-    ul>(li>a)*4
--->
+  `
+})
+export class AppComponent {
+  title = 'step1-bindings';
+  showAlert(){
+    alert("you clicked me")
+  }
+  changeTitle(){
+    this.title = "Changed"
+  }
+  keyfun(evt){
+    console.log(evt.target.value)
+  }
+}
