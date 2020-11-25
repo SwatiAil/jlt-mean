@@ -16,20 +16,50 @@ import { Component } from '@angular/core';
   <button (click)="title = 'changed inline'"> Click to change title inline </button>
   <br>
   <button on-click="title = 'changed inline'"> Click to change title inline </button>
+  <br>
   <input (keydown.space)="keyfun($event)" type="text">
   <br>
+  <input #ip (input)="inputfun(ip.value)" type="range">
+  <br>
+  <div [style.background-color]="'orange'">
+    hello there
+  </div>
+  <input type="checkbox" (change)="preferRoundedborder = !preferRoundedborder" >
+  <div class="box" [class.borderBox]="preferRoundedborder">
+    hello there
+  </div>
 
-  `
+  `,
+  styles : [`
+  .box{
+    background-color : cyan;
+    width : 200px;
+    height : 200px;
+    text-align : center;
+    line-height : 200px;
+    font-family : arial;
+    font-size : 24px;
+    font-weight : bold;
+  }
+  .borderBox{
+    border : 10px solid black;
+    border-radius : 100px;
+  }
+  `]
 })
 export class AppComponent {
   title = 'step1-bindings';
+  preferRoundedborder = false;
   showAlert(){
-    alert("you clicked me")
+    alert("you clicked me");
   }
   changeTitle(){
-    this.title = "Changed"
+    this.title = "Changed";
   }
   keyfun(evt){
-    console.log(evt.target.value)
+    console.log(evt.target.value);
+  }
+  inputfun(message){
+    console.log(message);
   }
 }
