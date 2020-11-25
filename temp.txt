@@ -32,6 +32,13 @@ import { Component } from '@angular/core';
     <p *ngSwitchCase="10">Unbeatable</p>
     <p *ngSwitchDefault >Needs Rest</p>
   </div>
+  <hr>
+  <div [ngClass]="stylelist" >
+    hello there
+  </div>
+  <div class="box borderBox" [ngClass]="{ pinkbox : power < 5, orangebox : power > 5 }" >
+    hello there
+  </div>
   `,
   styles : [`
     .display{
@@ -43,10 +50,30 @@ import { Component } from '@angular/core';
       font-size : 14px;
       text-align : justify;
     }
+    .box{
+      width : 200px;
+      height : 200px;
+      text-align : center;
+      line-height : 200px;
+      font-family : arial;
+      font-size : 24px;
+      font-weight : bold;
+    }
+    .borderBox{
+      border : 10px solid black;
+      border-radius : 100px;
+    }
+    .orangebox{
+      background-color : orange;
+    }
+    .pinkbox{
+      background-color : pink;
+    }
   `]
 })
 export class AppComponent {
   title = 'step2-directives';
+  stylelist = ['box', 'borderBox', 'orangebox'];
   showCondition = true;
   power  = 7;
 }
