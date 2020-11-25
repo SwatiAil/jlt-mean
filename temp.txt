@@ -3,81 +3,180 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template : `
-  <label *ngIf=!showCondition>Show Terms and Conditions : 
-    <input type="checkbox" (change)="showCondition = !showCondition">
-  </label>
-  <div *ngIf=showCondition class="display">
-    <h2>Terms and Conditions</h2>
-    <hr>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, voluptatum voluptatibus. Molestias est earum, eum quos reiciendis esse. Ea eaque, tempora. Dignissimos blanditiis, quod vel quibusdam id voluptatibus eligendi deserunt.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, voluptatum voluptatibus. Molestias est earum, eum quos reiciendis esse. Ea eaque, tempora. Dignissimos blanditiis, quod vel quibusdam id voluptatibus eligendi deserunt.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, voluptatum voluptatibus. Molestias est earum, eum quos reiciendis esse. Ea eaque, tempora. Dignissimos blanditiis, quod vel quibusdam id voluptatibus eligendi deserunt.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, voluptatum voluptatibus. Molestias est earum, eum quos reiciendis esse. Ea eaque, tempora. Dignissimos blanditiis, quod vel quibusdam id voluptatibus eligendi deserunt.
-    </p>
-    <label *ngIf=showCondition>Hide Terms and Conditions : 
-      <input type="checkbox" (change)="showCondition = !showCondition">
-    </label>
-  </div>
-  <hr>
-  <input #powerRange type="range" [value]="power" (change)="power = powerRange.value" min="0" max="10">
-  <br>
-  <input [(ngModel)]="power" type="range" min="0" max="10">
-  {{ power }}
-  <div [ngSwitch]="power">
-    <p *ngSwitchCase="6">Recovered</p>
-    <p *ngSwitchCase="7">Low Power</p>
-    <p *ngSwitchCase="8">Strong</p>
-    <p *ngSwitchCase="9">Stronger</p>
-    <p *ngSwitchCase="10">Unbeatable</p>
-    <p *ngSwitchDefault >Needs Rest</p>
-  </div>
-  <hr>
-  <div [ngClass]="stylelist" >
-    hello there
-  </div>
-  <div class="box borderBox" [ngClass]="{ pinkbox : power < 5, orangebox : power > 5 }" >
-    hello there
-  </div>
-  `,
-  styles : [`
-    .display{
-      width : 600px;
-      height : 320px;
-      background-color : silver;
-      padding : 10px;
-      font-family : verdana;
-      font-size : 14px;
-      text-align : justify;
-    }
-    .box{
-      width : 200px;
-      height : 200px;
-      text-align : center;
-      line-height : 200px;
-      font-family : arial;
-      font-size : 24px;
-      font-weight : bold;
-    }
-    .borderBox{
-      border : 10px solid black;
-      border-radius : 100px;
-    }
-    .orangebox{
-      background-color : orange;
-    }
-    .pinkbox{
-      background-color : pink;
-    }
-  `]
+  <ul>
+    <li *ngFor="let hero of heroes">{{ hero.name }}</li>
+  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th> Sl # </th>
+        <th> Title </th>
+        <th> Place </th>
+        <th> Full Name </th>
+        <th> Power </th>
+        <th> Poster </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hero of heroes">
+        <td> {{ hero.id }} </td>
+        <td> {{ hero.name }} </td>
+        <td> {{ hero.place }} </td>
+        <td> {{ hero.fullname }} </td>
+        <td> {{ hero.power }} </td>
+        <td> 
+          <img width="50" [src]="hero.url" alt="{{ hero.name }}">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  `
 })
 export class AppComponent {
-  title = 'step2-directives';
-  stylelist = ['box', 'borderBox', 'orangebox'];
-  showCondition = true;
-  power  = 7;
+  title = 'step3-pipes';
+  heroes = [{
+		"id": 1,
+		"name": "Batman",
+		"power": 47,
+		"fullname": "Bruce Wayne",
+		"place": "Crest Hill, Bristol Township; Gotham County",
+		"base": "Batcave, Stately Wayne Manor, Gotham City; Hall of Justice, Justice League Watchtower",
+		"url": "assets/images/batman.jpg"
+	},
+	{
+		"id": 2,
+		"name": "Ant-Man",
+		"power": 53,
+		"fullname": "Scott Lang",
+		"place": "Coral Gables, Florida",
+		"base": "South Beach, Miami, Florida; formerly Farmingdale, Long Island, New York",
+		"url": "assets/images/antman.jpg"
+	},
+	{
+		"id": 3,
+		"name": "Scarlet Witch",
+		"power": 100,
+		"fullname": "Wanda Maximoff",
+		"place": "Wundagore Mountain, Transia",
+		"base": "Mobile; formerly The Works; Avengers Compound, California; Avengers Mansion, New York",
+		"url": "assets/images/scarletwitch.jpg"
+	},
+	{
+		"id": 4,
+		"name": "Deadpool",
+		"power": 100,
+		"fullname": "Wade Wilson",
+		"place": "Canada",
+		"base": "Cavern-X, Sedona, Arizona, Mobile",
+		"url": "assets/images/deadpool.jpg"
+	},
+	{
+		"id": 5,
+		"name": "Captain Marvel",
+		"power": 100,
+		"fullname": "Carol Danvers",
+		"place": "Boston, Massachusetts",
+		"base": "Avengers Mansion",
+		"url": "assets/images/captainmarvel.jpg"
+	},
+	{
+		"id": 6,
+		"name": "Captain America",
+		"power": 60,
+		"fullname": "Steve Rogers",
+		"place": "Manhattan, New York City, New York",
+		"base": "New York City",
+		"url": "assets/images/captainamerica.jpg"
+	},
+	{
+		"id": 7,
+		"name": "Spider-Man",
+		"power": 74,
+		"fullname": "Peter Parker",
+		"place": "New York, New York",
+		"base": "New York, New York",
+		"url": "assets/images/spiderman.jpg"
+	},
+	{
+		"id": 8,
+		"name": "Doctor Strange",
+		"power": 100,
+		"fullname": "Stephen Strange",
+		"place": "Philadelphia, Pennsylvania",
+		"base": "New York, New York",
+		"url": "assets/images/doctorstrange.jpg"
+	},
+	{
+		"id": 9,
+		"name": "Black Panther",
+		"power": 41,
+		"fullname": "T'Challa",
+		"place": "Wakanda, Africa",
+		"base": "Wakanda, Mobile",
+		"url": "assets/images/blackpanther.jpg"
+	},
+	{
+		"id": 10,
+		"name": "Hulk",
+		"power": 98,
+		"fullname": "Bruce Banner",
+		"place": "Dayton, Ohio",
+		"base": "(Banner) Hulkbuster Base, New Mexico, (Hulk) mobile, but prefers New Mexico",
+		"url": "assets/images/hulk.jpg"
+	},
+	{
+		"id": 11,
+		"name": "Iron Man",
+		"power": 100,
+		"fullname": "Tony Stark",
+		"place": "Long Island, New York",
+		"base": "Seattle, Washington",
+		"url": "assets/images/ironman.jpg"
+	},
+	{
+		"id": 12,
+		"name": "Black Widow",
+		"power": "36",
+		"fullname": "Natasha Romanoff",
+		"place": "Volgograd",
+		"base": "Mobile",
+		"url": "assets/images/blackwidow.jpg"
+	},
+	{
+		"id": 13,
+		"name": "Hawkeye",
+		"power": 29,
+		"fullname": "Clint Barton",
+		"place": "Waverly, Iowa",
+		"base": "not known",
+		"url": "assets/images/hawkeye.jpg"
+	},
+	{
+		"id": 14,
+		"name": "Thor",
+		"power": 100,
+		"fullname": "Thor Odinson",
+		"place": "Asgard",
+		"base": "New York, New York",
+		"url": "assets/images/thor.jpg"
+	},
+	{
+		"id": 15,
+		"name": "Vision",
+		"power": 100,
+		"fullname": "Vision",
+		"place": "New York",
+		"base": "Mobile. Formerly Avengers Mansion, New York City and Avengers Compound",
+		"url": "assets/images/vision.jpg"
+	},
+	{
+		"id": 16,
+		"name": "Falcon",
+		"power": 22,
+		"fullname": "Sam Wilson",
+		"place": "New York, New York",
+		"base": "New York, New York; formerly Avengers Mansion, New York City, New York; S.H.I.E.L.D. Helicarrier.",
+		"url": "assets/images/falcon.jpg"
+	}
+]
 }
-
-/*
-<div [hidden]=showCondition class="display">
-*/
