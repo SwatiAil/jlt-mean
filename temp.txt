@@ -4,10 +4,10 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template : `
   <ul>
-    <li *ngFor="let hero of heroes">{{ hero.name }}</li>
+    <li *ngFor="let hero of heroes">{{ hero.title }}</li>
   </ul>
-  <table>
-    <thead>
+  <table class="table table-sm">
+    <thead class="thead-dark">
       <tr>
         <th> Sl # </th>
         <th> Title </th>
@@ -21,14 +21,14 @@ import { Component } from '@angular/core';
     <tbody>
       <tr *ngFor="let hero of heroes">
         <td> {{ hero.sl }} </td>
-        <td> {{ hero.title }} </td>
+        <td> {{ hero.title | uppercase | lowercase | titlecase }} </td>
         <td> {{ hero.city }} </td>
         <td> {{ hero.firstname+" "+hero.lastname }} </td>
-        <td> {{ hero.ticketprice }} </td>
+        <td> {{ hero.ticketprice | currency : 'INR' : 'code' : '3.2-3' }} </td>
         <td> 
           <img width="50" [src]="hero.poster" alt="{{ hero.name }}">
         </td>
-        <td>{{ hero.releasedate }}</td>
+        <td>{{ hero.releasedate | date }}</td>
       </tr>
     </tbody>
   </table>
@@ -43,7 +43,7 @@ export class AppComponent {
     "firstname": "Bruce",
     "lastname": "Wayne",
     "city": "Gotham",
-    "ticketprice": 123.45,
+    "ticketprice": 123.450987,
     "releasedate": "1/26/2018",
     "poster": "assets/images/batman.jpg"
 },
@@ -54,7 +54,7 @@ export class AppComponent {
     "firstname": "Clark",
     "lastname": "Kent",
     "city": "Metropolis",
-    "ticketprice": 178.67,
+    "ticketprice": 178,
     "releasedate": "1/27/2018",
     "poster": "assets/images/superman.jpg"
 },
@@ -103,3 +103,4 @@ export class AppComponent {
 }
 
 
+// 26 - January - 2018
